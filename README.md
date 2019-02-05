@@ -14,4 +14,8 @@ In order to get up and running as quickly as possible I've lowered some of the v
 
 Finally I've also chosen to fetch the raw data from your github repo and converted it to JSON on the fly in the action rather than load the txt file directly.
 
+Search function is a basic indexOf across all record properties (case insensitive I believe although I may have removed that).  Search is initiated via enter/return.  Sorting works ASC and DESC and by default is off.  Pagination is basic but functional.
+
+
+
 Feedback appreciated.
