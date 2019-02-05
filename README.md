@@ -12,4 +12,6 @@ The webpack config is currently set to DEV and will generate the appropriate HTM
 
 In order to get up and running as quickly as possible I've lowered some of the versions of various dependencies and modified the webpack config to allow for module.exports etc...
 
+Finally I've also chosen to fetch the raw data from your github repo and converted it to JSON on the fly in the action rather than load the txt file directly.
+
 Feedback appreciated.
