@@ -16,6 +16,6 @@ Finally I've also chosen to fetch the raw data from your github repo and convert
 
 Search function is a basic indexOf across all record properties (case insensitive I believe although I may have removed that).  Search is initiated via enter/return.  Sorting works ASC and DESC and by default is off.  Pagination is basic but functional.
 
-![Screen](/public_html/screen.png)
+![Screen](/public_html/screenshot.png)
 
 Feedback appreciated.
