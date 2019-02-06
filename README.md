@@ -10,7 +10,7 @@ Using immutable was part of the task but the task has taken up 3/4 day and I wan
 
 The webpack config is currently set to DEV and will generate the appropriate HTML test page with a link to the JS bundle in public_html/js/dist.  Webpack should create the js/dist dir automatically but it may need to be manually created.  
 
-## NOTE: The webpack config is setup so that the webpack executable is run from within the config folder.
+### NOTE: When building the bundle the webpack config is setup so that the webpack executable is run from within the config folder.
 
 In order to get up and running as quickly as possible I've lowered some of the versions of various dependencies and modified the webpack config to allow for module.exports etc...
 
