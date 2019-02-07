@@ -6,7 +6,7 @@ Using React, Redux, Reselect
 
 Immutable is listed as a dependency but I haven't actually got round to integrating this yet.
 
-The webpack config is currently set to DEV and will generate the appropriate HTML test page with a link to the JS bundle in public_html/js/dist.  A default webpack(ed) bundle is included and exporting the public_html directory to local will enable the app run in the web page.
+The webpack config is currently set to DEV and will generate the appropriate HTML test page with a link to the JS bundle in public_html/js/dist.  A default webpack(ed) bundle is included and exporting the public_html directory locally will enable the app to run in the web page.
 
 ### NOTE: If building the bundle yourself the webpack config is setup so that the webpack executable is run from within the config folder.  This is for historical reasons my side.
 
