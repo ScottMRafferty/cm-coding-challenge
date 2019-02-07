@@ -21,15 +21,11 @@ const tableReducer = function(state,action) {
             return newState;
         case C.SET_QUERY:
             newState.query = action.query;
+            // Reset start to 0 - we probably should hold previous position but for demo...
+            newState.start = 0; 
             return newState;
         default: return state || initialState.table;
     }
 };
 
 export default tableReducer;
-
-
-
-
-
-
