@@ -1,4 +1,3 @@
-var React = require('react'); // Here for query highlight decoration only
 import { createSelector } from 'reselect';
 
 // Simple helper sort function
@@ -33,14 +32,7 @@ const getRecordsFiltered = (records, query) => {
         return newRecords;
 
     return newRecords.filter(function(record, i) {
-        let results = Object.keys(record).map(function(e) {
-            let pos = record[e].toLowerCase().indexOf(query.toLowerCase());
-            // Next two lines is a fancy decorator for highlighting query term in the data - comment out to remove
-            if (pos > -1)
-                record[e] = <span>{record[e].substring(0, pos)}<strong><mark>{record[e].substring(pos,pos + query.length)}</mark></strong>{record[e].substring(pos+query.length, record[e].length)}</span>
-
-            return pos > -1;
-        });
+        let results = Object.keys(record).map(e=>record[e].toLowerCase().indexOf(query.toLowerCase()) > -1);
         return results.indexOf(true) > -1;
     });
 }

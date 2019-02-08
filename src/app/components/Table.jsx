@@ -20,7 +20,7 @@ const Table = (props) => {
     let tableHeaderNode = <tr>{columnNodes}</tr>;
 
     // Build the row item node array
-    let tableRowItemNodes = props.data.map((e,i)=><TableRow key={i} columns={columns} data={e} />);
+    let tableRowItemNodes = props.data.map((e,i)=><TableRow key={i} columns={columns} data={e} query={props.query} />);
 
     return (
         <table className="table table-condensed table-bordered table-striped">

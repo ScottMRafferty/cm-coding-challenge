@@ -39,6 +39,7 @@ class TableView extends React.Component {
                     isFetching={this.props.table.isFetching} 
                     sort_col={this.props.table.sort_col} 
                     sort_asc={this.props.table.sort_asc}
+                    query={this.props.table.query}
                     setSortCol={this.props.setSortCol}
                 />
             </div>
