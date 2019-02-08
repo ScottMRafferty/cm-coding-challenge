@@ -4,19 +4,26 @@ import "babel-polyfill";
 // Loads the data file from remote and converts it to a JSON object - one off for this demo
 export function fetchData() {
     return async function(dispatch, getState) {
+        dispatch(toggleFetching());
         fetch('https://raw.githubusercontent.com/mcspud/cm-coding-challenge/master/data.txt')
         .then(function(response) {
             return response.text();
         })
         .then(function(textData) {
             let parsedData = textData.replace(/'/g, '"');
-            dispatch(setData(JSON.parse(parsedData)));
+            dispatch(setData(JSON.parse(parsedData), false));
         });   
     }
 }
 
-export function setData(data) {
-    return {type: C.SET_DATA, data: data};
+// Toggle function (toggle simply to test update of table with a property 
+// that is not passed to reselect during dev - can be replaced with setFetching for prod)
+export function toggleFetching() {
+    return {type: C.TOGGLE_FETCHING};
+} 
+
+export function setData(data, invalid) {
+    return {type: C.SET_DATA, data: data, invalid: invalid};
 }
 
 export function setStart(start) {

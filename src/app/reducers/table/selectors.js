@@ -1,3 +1,4 @@
+var React = require('react'); // Here for query highlight decoration only
 import { createSelector } from 'reselect';
 
 // Simple helper sort function
@@ -26,11 +27,20 @@ const getRecordsFiltered = (records, query) => {
     if (typeof records === typeof undefined)
         return [];
 
-    if (typeof query === typeof undefined)
-        return records;
+    let newRecords = records.map(e => ({...e})); // Clone the entire array
 
-    return records.filter(function(record, i) {
-        let results = Object.keys(record).map(e=>record[e].indexOf(query) > -1);
+    if (typeof query === typeof undefined)
+        return newRecords;
+
+    return newRecords.filter(function(record, i) {
+        let results = Object.keys(record).map(function(e) {
+            let pos = record[e].toLowerCase().indexOf(query.toLowerCase());
+            // Next two lines is a fancy decorator for highlighting query term in the data - comment out to remove
+            if (pos > -1)
+                record[e] = <span>{record[e].substring(0, pos)}<strong><mark>{record[e].substring(pos,pos + query.length)}</mark></strong>{record[e].substring(pos+query.length, record[e].length)}</span>
+
+            return pos > -1;
+        });
         return results.indexOf(true) > -1;
     });
 }
@@ -53,7 +63,7 @@ const getRecordsSubset = (records, start, count) => {
     }
 }
 
-// A wrapper function for Filter, Sort and Subset functions
+// A wrapper function for Filter and Sort
 const getRecords = (records, query, start, count, sort_col, sort_asc) => {
 
     let filteredRecords = getRecordsFiltered(records,query);
@@ -61,18 +71,12 @@ const getRecords = (records, query, start, count, sort_col, sort_asc) => {
     if (typeof sort_col !== undefined)
        filteredRecords = getRecordsSorted(filteredRecords, sort_col, sort_asc);
 
-    return getRecordsSubset(filteredRecords, start, count);
+    return {records: filteredRecords, start: start, count: count};
 
 }
 
-// Selector function for the display records
-export const getDisplayRecords = createSelector(
+// Reselect function to return object for total records and subset of display records
+export const getDisplayData = createSelector(
     getRecords,
-    (records) => records
-)
-
-// Selector function for the record total
-export const getRecordTotal = createSelector(
-    getRecordsFiltered,
-    (records) => records.length 
+    (obj) => {return {total: obj.records.length, data: getRecordsSubset(obj.records, obj.start, obj.count)}}
 )

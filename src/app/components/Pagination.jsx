@@ -28,11 +28,11 @@ const Pagination = (props) => {
     let totalPages = Math.ceil(props.total / props.count);
     let currentPage = (props.start / props.count) + 1;
 
-    let previousNode = <PaginationButton disabled={currentPage === 1} title="Previous" setStart={()=>props.setStart(props.start - props.count)} />;
-    let nextNode = <PaginationButton disabled={currentPage === totalPages} title="Next" setStart={()=>props.setStart(props.start + props.count)}/>;
+    let previousNode = <PaginationButton disabled={currentPage === 1} title="Previous" setStart={()=>props.setStart(parseInt(props.start) - parseInt(props.count))} />;
+    let nextNode = <PaginationButton disabled={currentPage === totalPages} title="Next" setStart={()=>props.setStart(parseInt(props.start) + parseInt(props.count))}/>;
 
    return (
-        <nav aria-label="Page navigation" className="col-sm-8" style={{textAlign: 'right'}}>
+        <nav aria-label="Page navigation" className="col-sm-6" style={{textAlign: 'right'}}>
   <ul className="pagination" style={{margin: '0px'}}>
     {previousNode}
     <li className="disabled"><span>Page {currentPage} of {totalPages}</span></li>

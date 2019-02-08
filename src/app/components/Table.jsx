@@ -1,13 +1,13 @@
 var React = require('react');
-var ReactRedux = require("react-redux");
-import * as actions from "../reducers/table/actions";
-import * as selectors from "../reducers/table/selectors";
 import TableRow from '../components/TableRow';
 
 const Table = (props) => {
 
+    if (props.isFetching === true)
+        return <h4>Fetching data...</h4>;
+
     // If there is no data then let the user know
-    if (typeof props.data === typeof undefined || props.data.length < 1)
+    if (props.data.length < 1)
         return <h1>No results.</h1>
 
     // Simple sort icon node
@@ -34,18 +34,4 @@ const Table = (props) => {
     )
 }
 
-var mapStateToProps = function(state, ownProps) {
-    return {
-        sort_col: state.table.sort_col,
-        sort_asc: state.table.sort_asc,
-        data: selectors.getDisplayRecords(state.table.data, state.table.query, state.table.start, state.table.count, state.table.sort_col, state.table.sort_asc)
-    };
-};
-
-var mapDispatchToProps = function(dispatch){
-	return {
-        setSortCol:     function(col) { dispatch(actions.setSortCol(col))}
-    };
-};
-
-export default ReactRedux.connect(mapStateToProps, mapDispatchToProps)(Table);
+export default Table;
